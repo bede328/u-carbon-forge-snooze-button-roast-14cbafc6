@@ -8,9 +8,15 @@ import { mkdirSync, writeFileSync } from "node:fs";
 const LINE =
   "6 AM on a Saturday, and my alarm is ringing like I owe it money — mate, the only debt I have today is eight more hours of sleep.";
 
+// The competition gate allows 1-200 characters; keep the cap in one place
+// so the guard and the comment above cannot drift apart.
+const MAX_CHARS = 200;
+
 const codePoints = [...LINE];
-if (codePoints.length < 1 || codePoints.length > 200) {
-  throw new Error(`entry must be 1-200 characters, got ${codePoints.length}`);
+if (codePoints.length < 1 || codePoints.length > MAX_CHARS) {
+  throw new Error(
+    `entry must be 1-${MAX_CHARS} characters, got ${codePoints.length}`,
+  );
 }
 if (LINE.trim().length === 0) {
   throw new Error("entry must not be only whitespace");
